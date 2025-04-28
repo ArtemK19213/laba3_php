@@ -71,39 +71,55 @@
     </form>
 
     <script>
-        function validateForm() {
+        function validateForm() 
+        {
             let isValid = true;
             
-            // Валидация названия фильма
+            
             const filmTitle = document.getElementById('film_title').value.trim();
-            if (filmTitle.length < 2 || filmTitle.length > 100) {
+            if (filmTitle.length < 2 || filmTitle.length > 100) 
+            {
                 document.getElementById('film_title_error').textContent = 'Название фильма должно быть от 2 до 100 символов';
                 isValid = false;
-            } else {
+            } 
+
+            else
+            {
                 document.getElementById('film_title_error').textContent = '';
             }
             
-            // Валидация жанра
+            
             const genre = document.getElementById('genre').value;
-            if (genre === '') {
+            if (genre === '') 
+            {
                 document.getElementById('genre_error').textContent = 'Пожалуйста, выберите жанр';
                 isValid = false;
-            } else {
+            }
+
+            else 
+            {
                 document.getElementById('genre_error').textContent = '';
             }
             
-            // Валидация даты
+            
             const sessionDate = new Date(document.getElementById('session_date').value);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
             
-            if (isNaN(sessionDate.getTime())) {
+            if (isNaN(sessionDate.getTime()))
+            {
                 document.getElementById('session_date_error').textContent = 'Пожалуйста, введите корректную дату';
                 isValid = false;
-            } else if (sessionDate < today) {
+            }
+
+             else if (sessionDate < today) 
+            {
                 document.getElementById('session_date_error').textContent = 'Дата сеанса не может быть в прошлом';
                 isValid = false;
-            } else {
+            } 
+
+            else 
+            {
                 document.getElementById('session_date_error').textContent = '';
             }
             

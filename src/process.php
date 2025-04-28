@@ -1,5 +1,6 @@
 <?php
 
+require "db.php";
 
 function validateInput($data)
  {
@@ -65,8 +66,9 @@ function validateInput($data)
     if (empty($data['hall_number'])) 
     {
         $errors['hall_number'] = 'Номер зала обязателен для заполнения';
-    } elseif (!filter_var($data['hall_number'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 10]])) 
+    } 
 
+    elseif (!filter_var($data['hall_number'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 10]])) 
     {
         $errors['hall_number'] = 'Номер зала должен быть целым числом от 1 до 10';
     }
@@ -76,7 +78,10 @@ function validateInput($data)
     {
         $errors['ticket_price'] = 'Цена билета обязательна для заполнения';
 
-    } elseif (!filter_var($data['ticket_price'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 100, 'max_range' => 5000]])) {
+    } 
+
+    elseif (!filter_var($data['ticket_price'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 100, 'max_range' => 5000]])) 
+    {
         $errors['ticket_price'] = 'Цена билета должна быть от 100 до 5000 рублей';
     } 
     
@@ -138,7 +143,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         fclose($file);
         
 
-        header('Location: src/index.php?success=1');
+
+        $file = fopen($csvFile, "r");
+
+        fgetcsv($file);
+        
+        while(($data = fgetcsv($file, 1000, ";")) != false)
+        {
+            $stmt = $pdo->prepare("INSERT INTO cinema (film_title, genre, session_date, session_time, hall_number, ticket_price, description) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $data[6]]);
+
+        }
+
+        fclose($file);
+        header('Location: table.php');
         exit();
     } 
 
@@ -153,13 +171,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         }
 
         echo '</ul>';
-        echo '<a href="src/index.php">Вернуться к форме</a>';
+        echo '<a href="index.php">Вернуться к форме</a>';
     }
 }
  else 
 {
 
-    header('Location: src/index.php');
+    header('Location: index.php');
     exit();
 }
 ?>

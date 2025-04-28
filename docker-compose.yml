@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: php_apache_2
+    container_name: php_apache_3
     ports:
       - "8080:80"
     volumes:
@@ -13,21 +13,21 @@ services:
 
   db:
     image: mysql:5.7
-    container_name: mysql_db_2
+    container_name: mysql_db_3
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: testdb
+      MYSQL_DATABASE: db_laba3
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
-      - mysql_data_2:/var/lib/mysql
+      - mysql_data_3:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin_2
+    container_name: phpmyadmin_3
     restart: always
     environment:
       PMA_HOST: db
@@ -38,4 +38,4 @@ services:
       - db
 
 volumes:
-  mysql_data_2:
+  mysql_data_3:
