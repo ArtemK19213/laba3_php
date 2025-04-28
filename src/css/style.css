@@ -1,0 +1,42 @@
+*
+{
+    font-size: 20px;
+}
+
+    
+.error 
+{ 
+    color: rgb(245, 48, 196); 
+}
+
+.success 
+{ 
+    color: rgb(199, 76, 113); font-weight: bold; 
+    text-align: center;
+}
+
+form 
+{ 
+    display: flex;
+    flex-direction: column;
+    max-width: 500px; margin: 0 auto; 
+}
+label 
+{ 
+    display: block; margin-top: 10px; 
+}
+
+input, select, textarea 
+{ 
+    width: 100%; padding: 8px; margin-top: 5px; 
+}
+
+button 
+{ 
+    margin-top: 15px; padding: 10px 15px; background: #75454f; color: white; border: none; cursor: pointer; 
+}
+
+button:hover 
+{
+    background: #4e2f4a; 
+}
